@@ -51,6 +51,10 @@ public class Option {
         this.quantity = quantity;
     }
 
+    public int calculateTotalPrice(int quantity) {
+        return this.product.getPrice() * quantity;
+    }
+
     public boolean belongsTo(Long productId) {
         return this.product.getId().equals(productId);
     }
