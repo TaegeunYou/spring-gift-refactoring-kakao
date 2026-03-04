@@ -91,6 +91,59 @@
 - `JWT_SECRET` / `JWT_EXPIRATION` — JWT 서명 키 및 토큰 만료 시간
 - `KAKAO_CLIENT_ID` / `KAKAO_CLIENT_SECRET` / `KAKAO_REDIRECT_URI` — 카카오 OAuth2 인증 정보
 
+## API 명세서
+
+코드 수정 시 아래 명세와 실제 구현이 일치하는지 확인한다. 불일치가 발견되면 명세를 기준으로 삼는다.
+
+### 회원 API
+
+| URL | 메서드 | 기능 |
+|-----|--------|------|
+| `/api/members/register` | POST | 회원 가입 — 새 회원을 등록하고 토큰을 받는다 |
+| `/api/members/login` | POST | 로그인 — 회원을 인증하고 토큰을 받는다 |
+
+### 카테고리 API
+
+| URL | 메서드 | 기능 |
+|-----|--------|------|
+| `/api/categories` | POST | 카테고리 생성 |
+| `/api/categories/{categoryId}` | PUT | 카테고리 수정 |
+| `/api/categories` | GET | 카테고리 목록 조회 |
+
+### 상품 API
+
+| URL | 메서드 | 기능 |
+|-----|--------|------|
+| `/api/products` | POST | 상품 생성 |
+| `/api/products/{productId}` | GET | 상품 조회 |
+| `/api/products/{productId}` | PUT | 상품 수정 |
+| `/api/products/{productId}` | DELETE | 상품 삭제 |
+| `/api/products?page=0&size=10&sort=name,asc&categoryId=1` | GET | 상품 목록 조회 (페이지네이션) |
+
+### 상품 옵션 API
+
+| URL | 메서드 | 기능 |
+|-----|--------|------|
+| `/api/products/{productId}/options` | POST | 상품 옵션 추가 |
+| `/api/products/{productId}/options/{optionId}` | PUT | 상품 옵션 수정 |
+| `/api/products/{productId}/options/{optionId}` | DELETE | 상품 옵션 삭제 |
+| `/api/products/{productId}/options` | GET | 상품 옵션 목록 조회 |
+
+### 위시 리스트 API
+
+| URL | 메서드 | 기능 |
+|-----|--------|------|
+| `/api/wishes` | POST | 위시 리스트 상품 추가 |
+| `/api/wishes/{wishId}` | DELETE | 위시 리스트 상품 삭제 |
+| `/api/wishes?page=0&size=10&sort=createdDate,desc` | GET | 위시 리스트 조회 (페이지네이션) |
+
+### 주문 API
+
+| URL | 메서드 | 기능 |
+|-----|--------|------|
+| `/api/orders` | POST | 주문하기 |
+| `/api/orders?page=0&size=10&sort=orderDateTime,desc` | GET | 주문 목록 조회 (페이지네이션) |
+
 ## 프로젝트 컨벤션
 
 - 언어: **Java**
