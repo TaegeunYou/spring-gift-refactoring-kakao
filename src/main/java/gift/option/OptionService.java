@@ -43,7 +43,7 @@ public class OptionService {
         findProduct(productId);
 
         Option option = optionRepository.findById(optionId)
-            .filter(o -> o.getProduct().getId().equals(productId))
+            .filter(o -> o.belongsTo(productId))
             .orElseThrow(() -> new NoSuchElementException("옵션을 찾을 수 없습니다. id=" + optionId));
 
         option.update(name, quantity);
@@ -60,7 +60,7 @@ public class OptionService {
         }
 
         Option option = optionRepository.findById(optionId)
-            .filter(o -> o.getProduct().getId().equals(productId))
+            .filter(o -> o.belongsTo(productId))
             .orElseThrow(() -> new NoSuchElementException("옵션을 찾을 수 없습니다. id=" + optionId));
 
         optionRepository.delete(option);
