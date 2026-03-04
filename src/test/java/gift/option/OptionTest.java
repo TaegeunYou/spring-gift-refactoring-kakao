@@ -43,4 +43,13 @@ class OptionTest {
 
         assertThrows(IllegalArgumentException.class, () -> option.subtractQuantity(11));
     }
+
+    @Test
+    @DisplayName("0 이하의 수량을 차감하면 예외가 발생한다")
+    void subtractZeroOrNegativeThrows() {
+        Option option = createOption(10);
+
+        assertThrows(IllegalArgumentException.class, () -> option.subtractQuantity(0));
+        assertThrows(IllegalArgumentException.class, () -> option.subtractQuantity(-1));
+    }
 }
