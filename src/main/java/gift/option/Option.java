@@ -56,7 +56,7 @@ public class Option {
     }
 
     public boolean belongsTo(Long productId) {
-        return this.product.getId().equals(productId);
+        return this.product.hasId(productId);
     }
 
     public Long getId() {

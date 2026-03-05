@@ -20,11 +20,11 @@ disable-model-invocation: true
 
 코드를 수정하기 전에, 아래 순서대로 누수 지점을 탐색한다.
 
-### 1단계: Service 파일 스캔
-대상 범위에 해당하는 Service 클래스를 열어 메서드 본문을 읽는다.
+### 1단계: Service·Entity 파일 스캔
+대상 범위에 해당하는 Service 클래스와 Entity 클래스를 열어 메서드 본문을 읽는다.
 
 ### 2단계: 누수 패턴 식별
-각 Service 메서드에서 아래 패턴에 해당하는 코드를 찾는다.
+각 Service 메서드와 Entity 메서드에서 아래 패턴에 해당하는 코드를 찾는다.
 
 | # | 패턴 | 설명 | 예시 |
 |---|------|------|------|
@@ -33,6 +33,7 @@ disable-model-invocation: true
 | 3 | **검증 누수** | Entity 상태의 유효성을 Service에서 검사 | `if (!a.getOwnerId().equals(b))` |
 | 4 | **상태 질의 누수** | Entity 내부 상태를 getter로 꺼내 boolean 판단 | `entity.getToken() != null` → `entity.hasToken()` |
 | 5 | **비교 누수** | Entity 필드를 꺼내 동등성/대소 비교 | `entity.getPassword().equals(input)` |
+| 6 | **연쇄 getter 누수** | 연관 Entity의 getter를 꺼내 비교·판단 (Entity 내부 포함) | `this.product.getId().equals(id)` → `this.product.hasId(id)` |
 
 ### 3단계: 이동 가능 여부 판단
 발견된 각 누수에 대해 아래 기준으로 이동 가능 여부를 판단한다.
