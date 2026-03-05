@@ -10,14 +10,18 @@ disable-model-invocation: true
 작동을 유지하면서도 책임과 계산, 판단을 올바른 위치로 이동해 누수와 중복을 줄인다. **변경 전후가 분명한 개선을 최소 2개 이상 수행한다.** 신규 기능을 추가하지 않는다.
 
 ## 대상 범위
-프로젝트의 Entity(도메인 객체)와 Service 파일 전체
+사용자가 argument로 도메인 패키지명(예: `order`, `option member`)을 지정하면 해당 패키지의 Entity와 Service만 분석한다. argument가 없으면 프로젝트의 Entity와 Service 파일 전체를 대상으로 한다.
+
+- 예: `/domain-responsibility order` → `gift/order/` 패키지의 Entity·Service만 스캔
+- 예: `/domain-responsibility order option` → `gift/order/`, `gift/option/` 두 패키지만 스캔
+- 예: `/domain-responsibility` → 전체 스캔
 
 ## 탐색 절차
 
 코드를 수정하기 전에, 아래 순서대로 누수 지점을 탐색한다.
 
-### 1단계: Service 파일 전체 스캔
-모든 Service 클래스를 열어 메서드 본문을 읽는다.
+### 1단계: Service 파일 스캔
+대상 범위에 해당하는 Service 클래스를 열어 메서드 본문을 읽는다.
 
 ### 2단계: 누수 패턴 식별
 각 Service 메서드에서 아래 패턴에 해당하는 코드를 찾는다.
